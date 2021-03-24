@@ -79,7 +79,7 @@ class _MapView extends StatelessWidget {
 
     return Scaffold(
       body: GoogleMap(
-        onTap: (_) {
+        onTap: (LatLng latLng) {
           _launchURL();
         },
         mapType: MapType.normal,
