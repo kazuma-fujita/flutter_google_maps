@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_google_maps/map_view.dart';
 
+import 'fixed_position_map_view.dart';
+
 class Const {
   static const routeFirstView = '/first';
 }
@@ -24,6 +26,19 @@ class _FirstView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Google Maps App'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.map),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute<FixedPositionMapView>(
+                  builder: (BuildContext _context) => FixedPositionMapView(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Center(
         child: ElevatedButton(

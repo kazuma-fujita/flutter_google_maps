@@ -2,12 +2,12 @@
     package="com.example.flutter_google_maps">
     <!-- To request foreground location access, declare one of these permissions. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-   <application
+    <application
         android:label="flutter_google_maps"
         android:icon="@mipmap/ic_launcher">
-       <meta-data
-           android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyA_jKQIeRO0GcDYer7aED-bvnSay2N_xc4"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA_jKQIeRO0GcDYer7aED-bvnSay2N_xc4"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
