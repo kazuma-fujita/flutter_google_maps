@@ -7,7 +7,7 @@
         android:icon="@mipmap/ic_launcher">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA_jKQIeRO0GcDYer7aED-bvnSay2N_xc4"/>
+            android:value="${GOOGLE_API_KEY}"/> <!-- ${ビルド変数名}でビルド変数の値を取得 -->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

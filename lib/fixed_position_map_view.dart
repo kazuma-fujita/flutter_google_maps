@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FixedPositionMapView extends StatelessWidget {
@@ -52,28 +51,20 @@ class _ScrollBodyWidget extends StatelessWidget {
 }
 
 class _MapView extends StatelessWidget {
-  final _url =
+  static const _url =
       'https://www.google.com/maps/search/?api=1&q=35.667097,139.740178';
-  // 初期表示位置を新宿駅に設定
-  final Position _initialPosition = Position(
-    latitude: 35.667097,
-    longitude: 139.740178,
-    timestamp: DateTime.now(),
-    altitude: 0,
-    accuracy: 0,
-    heading: 0,
-    floor: null,
-    speed: 0,
-    speedAccuracy: 0,
+
+  static const _initialCameraPosition = CameraPosition(
+    target: LatLng(35.667097, 139.740178),
+    zoom: 16,
   );
 
   @override
   Widget build(BuildContext context) {
-    // 初期表示座標のMarkerを設定
-    final initialMarkers = {
-      _initialPosition.timestamp.toString(): Marker(
-        markerId: MarkerId(_initialPosition.timestamp.toString()),
-        position: LatLng(_initialPosition.latitude, _initialPosition.longitude),
+    final _initialMarkers = {
+      'initialMarker': Marker(
+        markerId: MarkerId('initialMarker'),
+        position: const LatLng(35.667097, 139.740178),
       ),
     };
 
@@ -84,11 +75,8 @@ class _MapView extends StatelessWidget {
         },
         mapType: MapType.normal,
         myLocationButtonEnabled: false,
-        initialCameraPosition: CameraPosition(
-          target: LatLng(_initialPosition.latitude, _initialPosition.longitude),
-          zoom: 16,
-        ),
-        markers: initialMarkers.values.toSet(),
+        initialCameraPosition: _initialCameraPosition,
+        markers: _initialMarkers.values.toSet(),
         scrollGesturesEnabled: false,
         zoomGesturesEnabled: false,
         rotateGesturesEnabled: false,

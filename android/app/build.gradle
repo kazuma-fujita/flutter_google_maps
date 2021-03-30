@@ -25,6 +25,19 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+// 環境変数を格納する配列
+def dartEnvironmentVariables = [
+        GOOGLE_API_KEY: ''
+]
+// --dart-defineの読み込み
+dartEnvironmentVariables =
+        dartEnvironmentVariables + project.property('dart-defines')
+            .split(',')
+            .collectEntries { entry ->
+                def pair = URLDecoder.decode(entry, 'UTF-8').split('=' as char)
+                [(pair.first()): pair.last()]
+            }
+
 android {
     compileSdkVersion 30
 
@@ -39,6 +52,8 @@ android {
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        manifestPlaceholders = [GOOGLE_API_KEY: dartEnvironmentVariables.GOOGLE_API_KEY] // added
+//        manifestPlaceholders = [GOOGLE_API_KEY: System.getenv("GOOGLE_API_KEY")] // added
     }
 
     buildTypes {
